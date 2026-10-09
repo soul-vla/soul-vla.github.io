@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <title>SOUL-VLA | Sparse Feature Policy Unlearning</title>
+    <meta name="description" content="SOUL selectively unlearns state hallucination behaviors in vision-language-action models using interpretable sparse features." />
+
+    <meta name="theme-color" content="#3273B7" />
+    <meta name="msapplication-TileColor" content="#3273B7" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://ajax.googleapis.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/index.css?v=20261009-soul-vla" />
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script defer src="static/js/bulma-carousel.min.js"></script>
+    <script defer src="static/js/bulma-slider.min.js"></script>
+    <script defer src="static/js/index.js?v=20261009-soul-vla"></script>
+  </head>
+
+  <body>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <main id="main-content">
+      <nav class="page-nav">
+        <div class="page-nav-inner">
+          <a href="#overview" class="page-nav-link active">Overview</a>
+          <a href="#hallucination" class="page-nav-link">State hallucination</a>
+          <a href="#method" class="page-nav-link">Method</a>
+          <a href="#experiments" class="page-nav-link">Experiments</a>
+          <a href="#bibtex" class="page-nav-link">BibTeX</a>
+        </div>
+      </nav>
+
+      <!-- Header -->
+      <section class="hero publication-header">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+              <!-- Title -->
+                <div class="title-wide">
+                  <h1 class="title is-1 publication-title">
+                    <span class="publication-title-line">Sparse Feature Policy Unlearning Mitigates State Hallucination</span>
+                    <span class="publication-title-line">in Vision-Language-Action Models</span>
+                  </h1>
+                </div>
+                <p class="publication-method">
+                  <strong>SOUL</strong> — <strong>S</strong>parse feature p<strong>O</strong>licy <strong>U</strong>n<strong>L</strong>earning
+                </p>
+              <!-- Author -->
+                <div class="is-size-5 publication-authors">
+                  <span class="author-block"><a href="https://jiho-lee-page2.github.io/" target="_blank">Jiho Lee</a><sup>1</sup>,</span>
+                  <span class="author-block"><a href="https://jeongeun-park-page.github.io/" target="_blank">Jeongeun Park</a><sup>2</sup>,</span>
+                  <span class="author-block"><a href="https://scholar.google.com/citations?user=IoJi1pEAAAAJ&hl=ko&oi=sra" target="_blank">Heayoun Choi</a><sup>1</sup>,</span>
+                  <span class="author-block"><a href="https://taekyungkim918.github.io/" target="_blank">Taekyung Kim</a><sup>3,*</sup>,</span>
+                  <span class="author-block"><a href="https://airlab.cau.ac.kr/members/professor/" target="_blank">Eunwoo Kim</a><sup>1,*</sup></span>
+                </div>
+
+                <!-- Affiliation -->
+                <div class="is-size-5 publication-affiliations">
+                  <span class="author-block">
+                    <span class="affiliation-marker cau">▶</span><sup>1</sup> Chung-Ang University
+                  </span>
+                  <span class="author-block">
+                    <span class="affiliation-marker gatech">▶</span><sup>2</sup> Georgia Institute of Technology
+                  </span>
+                  <span class="author-block">
+                    <span class="affiliation-marker naver">▶</span><sup>3</sup> NAVER AI Lab
+                  </span>
+                  <p class="is-size-6"><sup>*</sup> Corresponding authors</p>
+                </div>
+
+              <!-- Paper link -->
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a href="./assets/soul-vla_paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-alt"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://arxiv.org/abs/2610.09496" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="ai ai-arxiv"></i></span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+
+                </div>
+
+              <!-- Keywords -->
+                <div class="publication-keywords">
+                  <span class="keyword-label">Keywords:</span>
+                  <span class="keyword-tag">Vision-Language-Action Models</span>
+                  <span class="keyword-tag">Machine Unlearning</span>
+                  <span class="keyword-tag">Mechanistic Interpretability</span>
+                </div>
+                
+              <!-- Summary -->
+                <div class="summary-box">
+                  <span class="summary-label">In brief</span>
+                  <p>
+                    We identify <b>sparse features</b> associated with <b>state hallucination in VLAs</b>.<br>
+                    Building on this analysis, <b>SOUL</b> selectively unlearns hallucination-associated policy knowledge
+                    <br>while preserving successful manipulation behaviors.
+                  </p>
+
+                  <div class="summary-figure-card">
+                    <img
+                      src="./assets/soul-vla_overview.png"
+                      alt="Overview of sparse feature unlearning"
+                      class="summary-image"
+                    />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaser -->
+      <section class="hero is-small is-light" id="overview">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <div class="publication-video">
+                  <video controls muted loop playsinline preload="metadata">
+                    <source src="./assets/soul-vla_video.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified readable-content">
+              <p>
+                We study <b>state hallucination</b>, a recurring failure pattern in which a VLA continues acting as if an unrealized robot-object state had been achieved.
+              </p>
+
+              <p>
+                Our analyses find that state hallucination coincides with weakened attention to task-relevant visual regions, and a mechanistic interpretation via sparse autoencoders reveals that hallucination-associated sparse features are activated when these failures occur.
+                Based on this analysis, we propose <b>SOUL</b> (Sparse feature pOlicy UnLearning), which selectively unlearns policy knowledge associated with state hallucination behaviors, where sparse features identified from hallucination failures and successful behaviors serve as explicit forgetting and retention targets, respectively.
+              </p>
+
+              <p>
+                Experiments across VLA architectures in simulated and real-world environments show that our method substantially reduces hallucinated failures and improves task success without substantially compromising the existing manipulation capabilities.
+                These results suggest that interpretable feature analysis provides a practical basis for selectively modifying undesirable knowledge in robot policies.
+              </p>
+            </div>
+
+
+
+
+
+
+            <div class="performance-cards">
+              <div class="performance-card hallucination-card">
+                <div class="performance-value">0.6×</div>
+                <div class="performance-title">Hallucination reduced</div>
+                <div class="performance-subtitle">after unlearning</div>
+              </div>
+
+              <div class="performance-card success-card">
+                <div class="performance-value">1.9×</div>
+                <div class="performance-title">Success improved</div>
+                <div class="performance-subtitle">after unlearning</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- State Hallucination -->
+      <section class="section hallucination-section" id="hallucination">
+        <div class="container is-max-widescreen">
+          <h2 class="title is-3">State Hallucination</h2>
+
+          <div class="hallucination-definition-box">
+            <p>
+              <b>State hallucination</b> occurs when a VLA acts based on an
+              <span>incorrect implicit belief</span> about the robot-object state.
+            </p>
+          </div>
+
+          <div class="hallucination-video-grid">
+            <div class="hallucination-video-card">
+              <video controls muted loop playsinline preload="metadata">
+                <source src="./assets/soul-vla_hallucination_1.mp4" type="video/mp4" />
+              </video>
+              <p>Grasping, Transporting, Placing</p>
+            </div>
+
+            <div class="hallucination-video-card">
+              <video controls muted loop playsinline preload="metadata">
+                <source src="./assets/soul-vla_hallucination_2.mp4" type="video/mp4" />
+              </video>
+              <p>Grasping, Transporting, Placing</p>
+            </div>
+
+            <div class="hallucination-video-card">
+              <video controls muted loop playsinline preload="metadata">
+                <source src="./assets/soul-vla_hallucination_3.mp4" type="video/mp4" />
+              </video>
+              <p>Grasping, Transporting, Placing</p>
+            </div>
+
+            <div class="hallucination-video-card">
+              <video controls muted loop playsinline preload="metadata">
+                <source src="./assets/soul-vla_hallucination_g.mp4" type="video/mp4" />
+              </video>
+              <p>Grasping</p>
+            </div>
+
+            <div class="hallucination-video-card">
+              <video controls muted loop playsinline preload="metadata">
+                <source src="./assets/soul-vla_hallucination_p.mp4" type="video/mp4" />
+              </video>
+              <p>Transporting</p>
+            </div>
+          </div>
+
+          <div class="hallucination-types">
+            <div class="hallucination-type">
+              <span class="type-label">Grasping</span>
+              <p>
+                Prematurely closes the gripper while still approaching the object.
+              </p>
+            </div>
+
+            <div class="hallucination-type">
+              <span class="type-label">Transporting</span>
+              <p>
+                Moves as if carrying the object, although the gripper is empty.
+              </p>
+            </div>
+
+            <div class="hallucination-type">
+              <span class="type-label">Placing</span>
+              <p>
+                Releases at the target location as if an object were held.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Method -->
+      <section class="section" id="method">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3">Method</h2>
+
+          <div class="method-takeaway">
+            <span class="method-label">Key idea</span>
+            <p>
+              <b>Discover sparse features</b> associated
+              with hallucination and success execution,<br>then <b>selectively suppress</b> hallucination
+              features while preserving sucess-relevant ones.
+            </p>
+          </div>
+
+          <div class="method-interactive">
+            <!-- Tabs outside the box -->
+            <div class="method-tabs">
+              <button class="method-tab active" type="button" data-method-tab="discovery">
+                1. Feature Discovery
+              </button>
+
+              <button class="method-tab" type="button" data-method-tab="unlearning">
+                2. Feature Unlearning
+              </button>
+            </div>
+
+            <div class="method-tab-card">
+              <!-- Feature Discovery -->
+              <div class="method-tab-panel active" data-method-panel="discovery">
+                <figure class="method-tab-figure">
+                  <img
+                    src="./assets/soul-vla_method1.png"
+                    loading="lazy"
+                    alt="Feature discovery process"
+                  />
+                </figure>
+
+                <div class="method-description-box">
+                  <p>
+                    <b>1. Feature Discovery.</b>
+                    <span class="inline-step">1</span> Decompose VLA representations into sparse features,
+                    <span class="inline-step">2</span> analyze their activations over semantic visual regions, and
+                    <span class="inline-step">3</span> discover hallucination-relevant and success-relevant features.
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- Feature Unlearning -->
+              <div class="method-tab-panel" data-method-panel="unlearning">
+                <figure class="method-tab-figure">
+                  <img
+                    src="./assets/soul-vla_method2.png"
+                    loading="lazy"
+                    alt="Feature unlearning process"
+                  />
+                </figure>
+
+                <div class="method-description-box">
+                  <p>
+                    <b>2. Feature Unlearning.</b>
+                    <span class="inline-step">4</span> Select forget and retain region-feature pairs, and
+                    <span class="inline-step">5</span> update the policy to suppress hallucination features while preserving success features.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experiments -->
+      <section class="section section-light" id="experiments">
+        <div class="container">
+          <h2 class="title is-3 has-text-centered">Experiment videos</h2>
+
+          <div class="experiment-video">
+            <h3 class="experiment-title has-text-centered">Benchmark</h3>
+            <div class="experiment-video-grid">
+              <figure class="experiment-video-card">
+                <video controls muted loop playsinline preload="metadata" aria-label="OpenVLA on LIBERO-Plus">
+                  <source src="./assets/soul-vla_bench.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption>OpenVLA on LIBERO-Plus</figcaption>
+              </figure>
+              <figure class="experiment-video-card">
+                <video controls muted loop playsinline preload="metadata" aria-label="π0.5 on RoboCasa">
+                  <source src="./assets/soul-vla_bench2.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption>π<sub>0.5</sub> on RoboCasa</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="experiment-video">
+            <h3 class="experiment-title has-text-centered">Real-world</h3>
+            <div class="experiment-video-grid">
+              <figure class="experiment-video-card">
+                <video controls muted loop playsinline preload="metadata" aria-label="OpenVLA real-world experiments">
+                  <source src="./assets/soul-vla_real.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption>OpenVLA</figcaption>
+              </figure>
+              <figure class="experiment-video-card">
+                <video controls muted loop playsinline preload="metadata" aria-label="π0.5 real-world experiments">
+                  <source src="./assets/soul-vla_real2.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption>π<sub>0.5</sub></figcaption>
+              </figure>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BibTeX -->
+      <section class="section" id="bibtex">
+        <div class="container is-max-desktop content">
+          <div class="bibtex-header">
+            <h2 class="title is-3">BibTeX</h2>
+            <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard" type="button">
+              <i class="fas fa-copy"></i>
+              <span class="copy-text">Copy</span>
+            </button>
+          </div>
+
+          <pre id="bibtex-code"><code>@article{lee2026sparse,
+  title={Sparse Feature Policy Unlearning Mitigates State Hallucination in Vision-Language-Action Models},
+  author={Lee, Jiho and Park, Jeongeun and Choi, Heayoun and Kim, Taekyung and Kim, Eunwoo},
+  journal={arXiv preprint arXiv:2610.09496},
+  year={2026}
+}</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container is-max-desktop">
+        <div class="content">
+          <p>
+            This page was built using the
+            <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a>, adapted from the
+            <a href="https://nerfies.github.io" target="_blank" rel="noopener noreferrer">Nerfies</a>
+            project page. This website is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function copyBibTeX() {
+        const bibtex = document.getElementById("bibtex-code").innerText;
+        navigator.clipboard.writeText(bibtex).then(() => {
+          const button = document.querySelector(".copy-bibtex-btn");
+          const label = button.querySelector(".copy-text");
+          const originalText = label.innerText;
+
+          label.innerText = "Copied";
+          button.classList.add("copied");
+
+          setTimeout(() => {
+            label.innerText = originalText;
+            button.classList.remove("copied");
+          }, 1600);
+        });
+      }
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+
+      const scrollButton = document.querySelector(".scroll-to-top");
+      const navLinks = document.querySelectorAll(".page-nav-link");
+      const sections = Array.from(navLinks)
+        .map(link => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      function updateActiveNav() {
+        const scrollPosition = window.scrollY + 120;
+
+        let currentSection = sections[0];
+
+        sections.forEach(section => {
+          if (section.offsetTop <= scrollPosition) {
+            currentSection = section;
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove("active");
+
+          if (link.getAttribute("href") === `#${currentSection.id}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", function () {
+        if (scrollButton) {
+          if (window.scrollY > 300) {
+            scrollButton.classList.add("visible");
+          } else {
+            scrollButton.classList.remove("visible");
+          }
+        }
+
+        updateActiveNav();
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", function () {
+          setTimeout(updateActiveNav, 300);
+        });
+      });
+
+      updateActiveNav();
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".method-interactive").forEach((wrapper) => {
+          const tabs = wrapper.querySelectorAll(".method-tab");
+          const panels = wrapper.querySelectorAll(".method-tab-panel");
+
+          tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+              const target = tab.getAttribute("data-method-tab");
+
+              tabs.forEach((btn) => btn.classList.remove("active"));
+              panels.forEach((panel) => panel.classList.remove("active"));
+
+              tab.classList.add("active");
+
+              const targetPanel = wrapper.querySelector(
+                `[data-method-panel="${target}"]`
+              );
+
+              if (targetPanel) {
+                targetPanel.classList.add("active");
+              }
+            });
+          });
+        });
+      });
+
+    </script>
+  </body>
+</html>
